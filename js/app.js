@@ -24,7 +24,6 @@ function RandomPhrase() {
     const word= guessWord.split('');
     return word;
 };
-
 const randomPhrase = RandomPhrase()
 
 //adds the letters of a string to the display
@@ -41,17 +40,18 @@ function addPhrasetoDisplay () {
 };
 
 //check if letter is in phrase
-
-// function checkLetter (button){
-//     const li = document.getElementById('li');
-//     for (let i = 0; i< li.length; i++);
-//     if (button === li) {
-//         li[i].className = 'show';
-//         const match = li;
-//         return match;
-//     };
+function checkLetter(button) {
+    const li = document.querySelectorAll('.letter');
+    let match = null;
+    for (let i = 0; i < li.length; i++) {
+        if (button.textContent.toUpperCase() == li[i].textContent.toUpperCase()) {
+            li[i].classList.add('show');
+            match = button.textContent;
+        }
+    }
+    return match;
+}
 
 qwerty.addEventListener('click', (e) => {
       e.target.className += 'chosen';
-  })
-// };
+  });
