@@ -6,8 +6,6 @@ const button = document.getElementsByTagName('button');
 const tries = document.getElementsByClassName('tries');
 let life = 5;
 
-
-
 const phrases = [
     "Learn To Code",
     "Job Ready",
@@ -51,7 +49,7 @@ function checkLetter(button) {
     let match = null;
     for (let i = 0; i < li.length; i++) {
         if (button.textContent.toUpperCase() == li[i].textContent.toUpperCase()) {
-            li[i].className += 'show';
+            li[i].className += ' show';
             match = button.textContent;
         };
     };
@@ -65,16 +63,13 @@ qwerty.addEventListener('click', e => {
         button.className += 'chosen';
         button.disabled = true;
         const letterFound = checkLetter(button);
-    
-    if (letterFound == null) {
-        for (let i = 0; i <tries.length; i--) {
-            tries[i].style.display = 'none';
-            console.log('Nothing found')
- 
+        
+    if (letterFound === null) { 
+            life -= 1
+            tries[life].lastChild.src = 'images/lostHeart.png';  
+    }
     else { button.classList.add('show')
             button.classList.remove('chosen')
-        } // line 74
-    } // line 70 for loop
-    }; // line 69 
-    }; // line 63 
-}); // line 62 Event Listener
+        } 
+    } 
+}); 
