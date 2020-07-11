@@ -99,7 +99,6 @@ const checkWin = () => {
 };   
 
 //restart Game
-
 function reload() {
     resetButton.addEventListener('click', (event) => {
         location.reload();
