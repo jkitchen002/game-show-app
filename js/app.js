@@ -17,7 +17,7 @@ const phrases = [
 //click button to start game
 startGame.addEventListener('click', e => {
     overLay.style.display = 'none';
-    addPhrasetoDisplay();
+
   });
 
 //return random phrase from the array
@@ -42,6 +42,7 @@ function addPhrasetoDisplay () {
     ul.appendChild(li);
     };
 };
+addPhrasetoDisplay();
 
 //check if letter is in phrase
 function checkLetter(button) {
@@ -63,7 +64,6 @@ qwerty.addEventListener('click', e => {
         button.className += 'chosen';
         button.disabled = true;
         const letterFound = checkLetter(button);
-        
     if (letterFound === null) { 
             life -= 1
             tries[life].lastChild.src = 'images/lostHeart.png';  
@@ -72,4 +72,19 @@ qwerty.addEventListener('click', e => {
             button.classList.remove('chosen')
         } 
     } 
+    checkWin();
 }); 
+
+// Check for win
+const checkWin = () => {
+    const letter = document.querySelectorAll('.letter');
+    const show = document.querySelectorAll('.show');
+    const title = document.getElementsByClassName('title');
+
+        if (letter.length === show.length) {
+            title.textContent = 'Whoop whoop, you won';
+            overLay.classList.add('win');
+            overLay.style.display = 'flex';
+};     
+}; 
+
