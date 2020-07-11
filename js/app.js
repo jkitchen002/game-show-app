@@ -4,6 +4,7 @@ const show = document.getElementsByClassName('show');
 const qwerty =document.getElementById('qwerty');
 const button = document.getElementsByTagName('button');
 const tries = document.getElementsByClassName('tries');
+const resetButton = document.querySelector('.btn__reset');
 let life = 5;
 
 const phrases = [
@@ -21,12 +22,12 @@ startGame.addEventListener('click', e => {
   });
 
 //return random phrase from the array
-function RandomPhrase() {
+function RandomPhrase(phrases) {
     const guessWord = phrases[Math.floor(Math.random()*phrases.length)];
     const word= guessWord.split('');
     return word;
 };
-const randomPhrase = RandomPhrase()
+const randomPhrase = RandomPhrase(phrases)
 
 //adds the letters of a string to the display
 function addPhrasetoDisplay () {
@@ -68,9 +69,6 @@ qwerty.addEventListener('click', e => {
             life -= 1
             tries[life].lastChild.src = 'images/lostHeart.png';  
     }
-    else { button.classList.add('show')
-            button.classList.remove('chosen')
-        } 
     } 
     checkWin();
 }); 
@@ -79,12 +77,31 @@ qwerty.addEventListener('click', e => {
 const checkWin = () => {
     const letter = document.querySelectorAll('.letter');
     const show = document.querySelectorAll('.show');
-    const title = document.getElementsByClassName('title');
+    const title = document.querySelector('.title');
+    const phrase = document.querySelector('#phrase');
 
         if (letter.length === show.length) {
-            title.textContent = 'Whoop whoop, you won';
             overLay.classList.add('win');
+            title.textContent = "Whoop whoop, you won!!";
             overLay.style.display = 'flex';
+            resetButton.textContent = 'Play Again';
+            phrase.style.display = 'none';
+            reload(); 
 };     
-}; 
+    if (life === 0){
+        title.textContent = 'Hard luck, try again?';
+        overLay.classList.add('lose');
+        overLay.style.display = 'flex';
+        resetButton.textContent = 'Play Again';
+        phrase.style.display = 'none';
+        reload();     
+        }  
+};   
 
+//restart Game
+
+function reload() {
+    resetButton.addEventListener('click', (event) => {
+        location.reload();
+    });    
+  };
